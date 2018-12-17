@@ -323,8 +323,8 @@ public class BitcoinJSONRPCClient implements BitcoindRpcClient {
 
     @Override
     @SuppressWarnings({"unchecked"})
-    public Block getBlock(String blockHash, int type) throws GenericRpcException {
-        return new BlockMapWrapper((Map<String, ?>) query("getblock", blockHash, type));
+    public BlockDetail getBlock(String blockHash, int type) throws GenericRpcException {
+        return new BlockDetailMapWrapper((Map<String, ?>) query("getblock", blockHash, type));
     }
 
     @Override
@@ -1191,6 +1191,112 @@ public class BitcoinJSONRPCClient implements BitcoindRpcClient {
             if (!m.containsKey("nextblockhash"))
                 return null;
             return getBlock(nextHash());
+        }
+
+    }
+
+    private class BlockDetailMapWrapper extends MapWrapper implements BlockDetail, Serializable {
+
+        private BlockDetailMapWrapper(Map<String, ?> m) {
+            super(m);
+        }
+
+        @Override
+        public String hash() {
+            return mapStr("hash");
+        }
+
+        @Override
+        public int confirmations() {
+            return mapInt("confirmations");
+        }
+
+        @Override
+        public int size() {
+            return mapInt("size");
+        }
+
+        @Override
+        public int height() {
+            return mapInt("height");
+        }
+
+        @Override
+        public int version() {
+            return mapInt("version");
+        }
+
+        @Override
+        public String merkleRoot() {
+            return mapStr("merkleroot");
+        }
+
+        @Override
+        public String chainwork() {
+            return mapStr("chainwork");
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public List<RawTransaction> tx() {
+            final List<Map<String, ?>> vRawTransaction = (List<Map<String, ?>>) m.get("tx");
+            return new AbstractList<RawTransaction>() {
+
+                @Override
+                public RawTransaction get(int index) {
+                    return new RawTransactionImpl(vRawTransaction.get(index));
+                }
+
+                @Override
+                public int size() {
+                    return vRawTransaction.size();
+                }
+            };
+
+        }
+
+        @Override
+        public Date time() {
+            return mapDate("time");
+        }
+
+        @Override
+        public long nonce() {
+            return mapLong("nonce");
+        }
+
+        @Override
+        public String bits() {
+            return mapStr("bits");
+        }
+
+        @Override
+        public BigDecimal difficulty() {
+            return mapBigDecimal("difficulty");
+        }
+
+        @Override
+        public String previousHash() {
+            return mapStr("previousblockhash");
+        }
+
+        @Override
+        public String nextHash() {
+            return mapStr("nextblockhash");
+        }
+
+        @Override
+        public BlockDetail previous() throws GenericRpcException {
+            if (!m.containsKey("previousblockhash"))
+                return null;
+            return getBlock(previousHash(), 2);
+        }
+
+        @Override
+        public BlockDetail next() throws GenericRpcException {
+            if (!m.containsKey("nextblockhash"))
+                return null;
+            return getBlock(nextHash(), 2);
         }
 
     }

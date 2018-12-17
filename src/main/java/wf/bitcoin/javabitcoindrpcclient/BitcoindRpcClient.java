@@ -78,7 +78,7 @@ public interface BitcoindRpcClient {
      */
     Block getBlock(String blockHash) throws GenericRpcException;
 
-    Block getBlock(String blockHash, int type) throws GenericRpcException;
+    BlockDetail getBlock(String blockHash, int type) throws GenericRpcException;
 
     /**
      * The getblock RPC gets a block with a particular header hash from the local block database as a serialized block.
@@ -1249,6 +1249,41 @@ public interface BitcoindRpcClient {
         Block previous() throws GenericRpcException;
 
         Block next() throws GenericRpcException;
+    }
+
+    static interface BlockDetail extends MapWrapperType, Serializable {
+
+        String hash();
+
+        int confirmations();
+
+        int size();
+
+        int height();
+
+        int version();
+
+        String merkleRoot();
+
+        List<RawTransaction> tx();
+
+        Date time();
+
+        long nonce();
+
+        String bits();
+
+        BigDecimal difficulty();
+
+        String previousHash();
+
+        String nextHash();
+
+        String chainwork();
+
+        BlockDetail previous() throws GenericRpcException;
+
+        BlockDetail next() throws GenericRpcException;
     }
 
     static interface BlockChainInfo extends MapWrapperType, Serializable {
