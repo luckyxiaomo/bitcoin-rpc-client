@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <groupId>wf.bitcoin</groupId>
+  <groupId>lk.bitcoin</groupId>
   <artifactId>bitcoin-rpc-client</artifactId>
   <packaging>jar</packaging>
   
-  <version>1.1.1-SNAPSHOT</version>
+  <version>2.0.0</version>
   
   <name>Java Bitcoind RPC Client</name>
   <description>A lightweight Java bitcoin JSON-RPC client binding</description>
-  <url>https://github.com/Polve/bitcoin-rpc-client</url>
+  <url>https://github.com/luckyxiaomo/bitcoin-rpc-client</url>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,7 +18,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     
     <!-- GitHub -->
-    <github.namespace>Polve</github.namespace>
+    <github.namespace>luckyxiaomo</github.namespace>
     <github.project>bitcoin-rpc-client</github.project>
   </properties>
     
@@ -56,6 +56,13 @@
         <role>developer</role>
       </roles>
     </developer>
+    <developer>
+      <name>Lucky suxiaomo</name>
+      <email>lksuxiaomo@outlook.com</email>
+      <roles>
+          <role>developer</role>
+      </roles>
+    </developer>
   </developers>
 
   <dependencies>
@@ -68,9 +75,9 @@
   </dependencies>
 
   <scm>
-    <connection>scm:git:https://github.com/Polve/bitcoin-rpc-client</connection>
-    <developerConnection>scm:git:https://github.com/Polve/bitcoin-rpc-client.git</developerConnection>
-    <url>scm:git:https://github.com/Polve/bitcoin-rpc-client</url>
+    <connection>scm:git:https://github.com/luckyxiaomo/bitcoin-rpc-client</connection>
+    <developerConnection>scm:git:https://github.com/luckyxiaomo/bitcoin-rpc-client.git</developerConnection>
+    <url>scm:git:https://github.com/luckyxiaomo/bitcoin-rpc-client</url>
   </scm>
 
   <distributionManagement>
