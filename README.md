@@ -15,8 +15,19 @@ The package is published in the wf.bitcoin group and you can add it to you pom.x
 </dependency>
 ```
 
+Now
+=====
+The package not published
+
+```
+<dependency>
+    <groupId>lk.bitcoin</groupId>
+    <artifactId>bitcoin-rpc-client</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
 
 
 ```
-mvn install:install-file -Dfile=G:\jone-git\bitcoin-rpc-client\target\bitcoin-rpc-client-2.0.0.jar  -DgroupId=lk.bitcoin -DartifactId=bitcoin-rpc-client -Dversion=2.0.0 -Dpackaging=jar
+mvn install:install-file -Dfile=<the file path>  -DgroupId=lk.bitcoin -DartifactId=bitcoin-rpc-client -Dversion=2.0.0 -Dpackaging=jar
 ```
