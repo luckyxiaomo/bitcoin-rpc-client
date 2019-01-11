@@ -82,7 +82,7 @@ public interface BitcoindRpcClient {
    * The getblock RPC gets a block with a particular header hash from the local block database either as a JSON object or as a serialized block.
    *
    * @param blockHash The hash of the header of the block to get, encoded as hex in RPC byte order
-   * @param type (numeric, optional, default=1) 0 for hex encoded data, 1 for a json object, and 2 for json object with transaction data
+   * @param type      (numeric, optional, default=1) 0 for hex encoded data, 1 for a json object, and 2 for json object with transaction data
    * @see <a href="https://bitcoin.org/en/developer-reference#getblock">getblock</a>
    */
   BlockDetail getBlock(String blockHash, int type) throws GenericRpcException;
@@ -483,7 +483,6 @@ public interface BitcoindRpcClient {
    * loadwallet "filename"
    * removeprunedfunds "txid"
    * rescanblockchain ("start_height") ("stop_height")
-   * sendmany "" {"address":amount,...} ( minconf "comment" ["address",...] replaceable conf_target "estimate_mode")
    * sethdseed ( "newkeypool" "seed" )
    * signrawtransactionwithwallet "hexstring" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] sighashtype )
    * unloadwallet ( "wallet_name" )
@@ -492,6 +491,16 @@ public interface BitcoindRpcClient {
    * walletpassphrasechange "oldpassphrase" "newpassphrase"
    * walletprocesspsbt "psbt" ( sign "sighashtype" bip32derivs )
    */
+
+  /**
+   * The sendmany RPC creates and broadcasts a transaction which sends outputs to multiple addresses.
+   *
+   * @param account The name of the account from which the bitcoins should be spent. Use an empty string (“”) for the default account.
+   * @param toPay   <k,v> k:A P2PKH or P2SH address to which the bitcoins should be sent , v:The amount to spent in bitcoins
+   * @return The TXID of the sent transaction, encoded as hex in RPC byte order
+   * @see <a href="https://bitcoin.org/en/developer-reference#sendmany">sendmany</a>
+   */
+  String sendMany(String account, Map<String, BigDecimal> toPay);
 
   /**
    * The addmultisigaddress RPC adds a P2SH multisig address to the wallet.

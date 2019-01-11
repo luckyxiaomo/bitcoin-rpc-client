@@ -858,6 +858,11 @@ public class BitcoinJSONRPCClient implements BitcoindRpcClient {
   }
 
   @Override
+  public String sendMany(String account, Map<String, BigDecimal> toPay) {
+    return (String) query("sendmany", account, toPay);
+  }
+
+  @Override
   public String addMultiSigAddress(int nRequired, List<String> keyObject) throws GenericRpcException {
     return (String) query("addmultisigaddress", nRequired, keyObject);
   }
