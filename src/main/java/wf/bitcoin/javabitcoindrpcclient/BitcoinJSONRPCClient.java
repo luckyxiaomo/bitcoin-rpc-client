@@ -1043,8 +1043,6 @@ public class BitcoinJSONRPCClient implements BitcoindRpcClient {
     }
   }
 
-  ;
-
   @SuppressWarnings("serial")
   private class AddressWrapper extends MapWrapper implements Address, Serializable {
 

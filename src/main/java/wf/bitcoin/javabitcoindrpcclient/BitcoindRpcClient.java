@@ -78,6 +78,13 @@ public interface BitcoindRpcClient {
    */
   Block getBlock(String blockHash) throws GenericRpcException;
 
+  /**
+   * The getblock RPC gets a block with a particular header hash from the local block database either as a JSON object or as a serialized block.
+   *
+   * @param blockHash The hash of the header of the block to get, encoded as hex in RPC byte order
+   * @param type (numeric, optional, default=1) 0 for hex encoded data, 1 for a json object, and 2 for json object with transaction data
+   * @see <a href="https://bitcoin.org/en/developer-reference#getblock">getblock</a>
+   */
   BlockDetail getBlock(String blockHash, int type) throws GenericRpcException;
 
   /**
@@ -1081,7 +1088,6 @@ public interface BitcoindRpcClient {
    */
 
   /***************************************************************************************************************************/
-
   /**
    * The estimatefee RPC estimates the transaction fee per kilobyte that needs to be paid for a transaction to be included within a certain number of blocks.
    *
@@ -1093,7 +1099,6 @@ public interface BitcoindRpcClient {
   BigDecimal estimateFee(int nBlocks) throws GenericRpcException;
 
   /***************************************************************************************************************************/
-
   static interface Address extends MapWrapperType, Serializable {
 
     String address();
@@ -1249,41 +1254,6 @@ public interface BitcoindRpcClient {
     Block previous() throws GenericRpcException;
 
     Block next() throws GenericRpcException;
-  }
-
-  static interface BlockDetail extends MapWrapperType, Serializable {
-
-    String hash();
-
-    int confirmations();
-
-    int size();
-
-    int height();
-
-    int version();
-
-    String merkleRoot();
-
-    List<RawTransaction> tx();
-
-    Date time();
-
-    long nonce();
-
-    String bits();
-
-    BigDecimal difficulty();
-
-    String previousHash();
-
-    String nextHash();
-
-    String chainwork();
-
-    BlockDetail previous() throws GenericRpcException;
-
-    BlockDetail next() throws GenericRpcException;
   }
 
   static interface BlockChainInfo extends MapWrapperType, Serializable {
@@ -1730,5 +1700,40 @@ public interface BitcoindRpcClient {
     BigDecimal payTxFee();
 
     String hdMasterKeyId();
+  }
+
+  static interface BlockDetail extends MapWrapperType, Serializable {
+
+    String hash();
+
+    int confirmations();
+
+    int size();
+
+    int height();
+
+    int version();
+
+    String merkleRoot();
+
+    List<RawTransaction> tx();
+
+    Date time();
+
+    long nonce();
+
+    String bits();
+
+    BigDecimal difficulty();
+
+    String previousHash();
+
+    String nextHash();
+
+    String chainwork();
+
+    BlockDetail previous() throws GenericRpcException;
+
+    BlockDetail next() throws GenericRpcException;
   }
 }
